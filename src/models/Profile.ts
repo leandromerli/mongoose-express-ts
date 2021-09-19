@@ -15,7 +15,7 @@ export interface IProfile extends Document {
   username: string;
 }
 
-const profileSchema: Schema = new Schema({
+const profileSchema: Schema<IProfile> = new Schema<IProfile>({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User"

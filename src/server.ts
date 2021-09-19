@@ -1,4 +1,4 @@
-import bodyParser from "body-parser";
+
 import express from "express";
 
 import connectDB from "../config/database";
@@ -12,9 +12,9 @@ const app = express();
 connectDB();
 
 // Express configuration
-app.set("port", process.env.PORT || 5000);
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.set("port", process.env.PORT || 3000);
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // @route   GET /
 // @desc    Test Base API

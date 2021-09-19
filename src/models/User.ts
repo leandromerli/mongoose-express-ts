@@ -21,6 +21,9 @@ const userSchema: Schema<IUser> = new Schema<IUser>({
     type: String,
     required: true
   },
+  gravatar: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

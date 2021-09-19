@@ -5,7 +5,6 @@ import { check, validationResult } from "express-validator/check";
 import gravatar from "gravatar";
 import HttpStatusCodes from "http-status-codes";
 import jwt from "jsonwebtoken";
-
 import Payload from "../../types/Payload";
 import Request from "../../types/Request";
 import User, { IUser } from "../../models/User";
@@ -37,6 +36,7 @@ router.post(
       let user: IUser = await User.findOne({ email });
 
       if (user) {
+        console.log("user exists!",email)
         return res.status(HttpStatusCodes.BAD_REQUEST).json({
           errors: [
             {
@@ -45,15 +45,13 @@ router.post(
           ]
         });
       }
-
       const options: gravatar.Options = {
         s: "200",
         r: "pg",
         d: "mm"
       };
 
-      const avatar = gravatar.url(email, options);
-
+      const avatar = gravatar.url(email, options); 
       const salt = await bcrypt.genSalt(10);
       const hashed = await bcrypt.hash(password, salt);
 
@@ -66,8 +64,12 @@ router.post(
 
       user = new User(userFields);
 
+      console.log("creating user ",email)
+
       await user.save();
 
+      console.log("created user ",email)
+    
       const payload: Payload = {
         userId: user.id
       };
@@ -87,5 +89,35 @@ router.post(
     }
   }
 );
+
+
+
+router.get('/:id',
+async (req: Request, res: Response) => {
+  try {
+    let id=req.params.id;
+
+
+    let user: IUser = await User
+    .findById(id)
+    .select("-password");
+
+    if (!user) {
+      console.log('user not found',id)
+      return res.status(HttpStatusCodes.BAD_REQUEST).json({
+        errors: [
+          {
+            msg: "User don't exists"
+          }
+        ]
+      });
+    }else{
+      res.json(user)
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(HttpStatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
+  }
+});
 
 export default router;

@@ -1,5 +1,15 @@
 # Mongoose Node.js Express TypeScript application boilerplate with best practices for API development.
 
+Changes from original project:
+
+1- Fix typescript issue
+
+2- Complete CRUD for User
+
+3- Create a User Controller so the routes are one file and the CRUD in other
+
+
+##
 ![image](https://user-images.githubusercontent.com/10678997/57565876-01281b00-73f8-11e9-8d86-911faa4a6c0f.png)
 
 The main purpose of this repository is to show a good end-to-end project setup and workflow for writing a Mongoose Node.js Express code in TypeScript complete with middleware, models, routes, and types.

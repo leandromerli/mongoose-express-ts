@@ -8,6 +8,8 @@ Changes from original project:
 
 3- Create a User Controller so the routes are one file and the CRUD in other
 
+4- Remove Profile Model
+
 
 ##
 ![image](https://user-images.githubusercontent.com/10678997/57565876-01281b00-73f8-11e9-8d86-911faa4a6c0f.png)
